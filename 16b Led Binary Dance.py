@@ -1,7 +1,7 @@
 # 16b Binary Dance Python program example:
 
 # Note: be mindful while working with
-# electroics. There are mistakes that
+# electronics. There are mistakes that
 # cannot be corrected should you ignore
 # any basic electronics rules. Electronics
 # demands basic math skills and knowledge
@@ -49,13 +49,11 @@
 # and arrays, you can use them to make
 # the two RGB leds be different colours.
 
-import RPi.GPIO as GPIO,drivers
-from time import sleep as wait
+from RGBProgram import*
 
 GPIO.setmode(GPIO.BOARD) # breadboard method
 GPIO.setwarnings(False) # disable setwarnings
 display=drivers.Lcd() # enable the LCD display
-
 display.lcd_clear() # clear the LCD screen
 
 latch=33
@@ -127,7 +125,7 @@ led_loop3=pink_cyan,cyan_pink
 
 buz=23,29
 
-led_speed=.2
+led_speed=.18
 
 for i in buz:
     GPIO.setup(i,GPIO.OUT)
@@ -171,8 +169,8 @@ while True:
             bin=f'{i:b}'
             for x in range(2):
                 exec(RGB_off)
-                exec(led_loop1[x])
-                GPIO.output(buz[x],1);wait(.0035)
+                exec(led_loop2[x])
+                GPIO.output(buz[x],1);wait(.0099)
                 for j in range(16):
                     GPIO.output(latch,0)
                     GPIO.output(data_bit,int(bin[j])-1)
@@ -190,8 +188,8 @@ while True:
             bin=f'{i:b}'
             for x in range(2):
                 exec(RGB_off)
-                exec(led_loop2[x])
-                GPIO.output(buz[x],1);wait(.0035)
+                exec(led_loop3[x])
+                GPIO.output(buz[x],1);wait(.0099)
                 for j in range(16):                
                     GPIO.output(latch,0)
                     GPIO.output(data_bit,int(bin[j]))
@@ -211,7 +209,7 @@ while True:
                 
             for x in range(2):
                 exec(RGB_off)
-                exec(led_loop3[x])
+                exec(led_loop4[x])
                 GPIO.output(buz[x],1)
                 wait(led_speed)
                 GPIO.output(buz[x],0)
